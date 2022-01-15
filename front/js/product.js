@@ -78,7 +78,6 @@ function ajoutLocalstorage(data) {
         //Envoie des données dans le localstorage
         localStorage.setItem(addIdCouleur, JSON.stringify(addFull));
           alert(`Votre panier contient ${quantity.value} ${data.name} ${colors.value} !`);
-  
       }
   }
   )};
