@@ -33,3 +33,25 @@ function viewKanap(data) {
       kanapImg1.src = `${kanap.imageUrl}`;
       //Affichage de la description de img (kanapImg1)
       kanapImg1.alt = `${kanap.altTxt}`;
+
+      //Création de l'élément h3 HTML
+      let kanapH3 = document.createElement("h3");
+      //Élement h3 enfant de items (lienItems)
+      let prod2 = lienItems.appendChild(kanapH3);
+      //Élement h3 enfant de article (kanapArticle)
+      kanapArticle.appendChild(prod2);
+      //Création de la classe kanapName
+      kanapH3.setAttribute("class","kanapName");
+      //Affichage du nom de la classe (kanapName)
+      kanapH3.innerHTML = `${kanap.name}`;
+
+      //Création de l'élément p HTML
+      let kanapImg3 = document.createElement("p");
+      //Élement p enfant de items (lienItems)
+      let prod3 = lienItems.appendChild(kanapImg3);
+      //Élement p enfant de article (kanapArticle)
+      kanapArticle.appendChild(prod3);
+      //Affichage de la description p (kanapImg3)
+      kanapImg3.innerHTML = `${kanap.description}`;
+    }
+};
