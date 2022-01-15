@@ -5,7 +5,7 @@ let id = params.get('id');
 // Récupération des données de l'API et liaison de l'id produit avec l'API //
 fetch(`http://localhost:3000/api/products/${id}`)
   .then(res => res.json())
-  .then(data => { affichageElement(data); ajoutLocalstorage(data); })
+  .then(data => { affichageElement(data); ajoutLocalStorage(data); })
   .catch(_error => { alert('Aucune réponse du serveur (API)...'); });
 
 // Fonction qui récupére et insère les éléments (DOM) dans la page //
@@ -48,7 +48,7 @@ function affichageElement(data) {
 };
 
 // Fonction qui permet de stocké les élements dans le panier (localStorage) //
-function ajoutLocalstorage(data) {
+function ajoutLocalStorage(data) {
     //Récupération de l'élément addToCart stocké dans une variable (addToCart)
     let addTocart = document.querySelector("#addToCart");
     //Écoute de l'élément addToCart (évenement click)
