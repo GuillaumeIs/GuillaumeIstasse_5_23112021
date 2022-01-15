@@ -46,3 +46,39 @@ function affichageElement(data) {
     elementOption.innerHTML = `${color}`;
 }
 };
+
+// Fonction qui permet de stocké les élements dans le panier (localStorage) //
+function ajoutLocalstorage(data) {
+    //Récupération de l'élément addToCart stocké dans une variable (addToCart)
+    let addTocart = document.querySelector("#addToCart");
+    //Écoute de l'élément addToCart (évenement click)
+    addTocart.addEventListener("click", () => {
+  
+      //Stockage des données dans un objet
+      let addFull = {
+        id: data._id,
+        quantite: quantity.value,
+        couleur: colors.value,
+        name: data.name,
+        prix: data.price,
+        imageUrl: data.imageUrl,
+        description: data.description,
+        altTxt: data.altTxt
+      }
+  
+      //Vérification du choix d'au moins une couleur (string)
+      if (colors.value === "") {
+          alert("Veuillez choisir au moins une couleur.");
+      //Vérification du choix d'au moins d'un kanap (number)
+      } else if (quantity.value == 0) {
+          alert("Veuillez choisir au moins un ou plusieurs kanap.");
+      } else {
+        //Ajout de l'id et de la couleur dans un tableau stocké dans une variable (addIdCouleur)
+        let addIdCouleur = [data._id, colors.value];
+        //Envoie des données dans le localstorage
+        localStorage.setItem(addIdCouleur, JSON.stringify(addFull));
+          alert(`Votre panier contient ${quantity.value} ${data.name} !`);
+  
+      }
+  }
+  )};
