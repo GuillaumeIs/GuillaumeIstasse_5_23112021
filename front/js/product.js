@@ -77,7 +77,7 @@ function ajoutLocalstorage(data) {
         let addIdCouleur = [data._id, colors.value];
         //Envoie des données dans le localstorage
         localStorage.setItem(addIdCouleur, JSON.stringify(addFull));
-          alert(`Votre panier contient ${quantity.value} ${data.name} !`);
+          alert(`Votre panier contient ${quantity.value} ${data.name} ${colors.value} !`);
   
       }
   }
