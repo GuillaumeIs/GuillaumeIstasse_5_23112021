@@ -10,7 +10,7 @@ function kanapLocal(i) {
 // Fonction qui affiche les élements stockés dans le localstorage //
 function kanapArticle() {
     //Récupération de #cart__items stocké dans la varible cartItems
-	let cartItems = document.querySelector("#cart__items");
+    let cartItems = document.querySelector("#cart__items");
     if (localStorage.length !== 0)  {
         for (let i = 0; i < localStorage.length; i++) {
             //Récupération de la fonction kanapLocal stocké dans la variable kanap
