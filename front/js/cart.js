@@ -1,7 +1,7 @@
 // Fonction qui récupére les élements stockés dans le localstorage //
 function kanapLocal(i) {
     //Récupération de la clé du localstorage stocké dans la variable kanapKey
-	let kanapKey = localStorage.key(i);
+    let kanapKey = localStorage.key(i);
     //Écriture des élements stocké dans le localstorage
     let kanapStorage = JSON.parse(localStorage.getItem(kanapKey));
     return kanapStorage;
