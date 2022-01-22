@@ -46,6 +46,7 @@ function kanapArticle() {
 }};
 kanapArticle();
 
+// Fonction qui vérifie les valeurs rentrer dans le formulaire //
 function nouveauFormulaire() {
     //Récupération de la valeur de l'élement firstName stocké dans la varible utiPrenom
     let utiPrenom = document.querySelector("#firstName").value;
