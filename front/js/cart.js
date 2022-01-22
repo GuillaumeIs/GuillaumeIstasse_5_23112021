@@ -97,3 +97,4 @@ function nouveauFormulaire() {
     } else { lastNameErrorMsg.innerHTML = "Veuillez entrer un nom."; }
     } else { firstNameErrorMsg.innerHTML = "Veuillez entrer un prénom."; }
 };
+nouveauFormulaire();
