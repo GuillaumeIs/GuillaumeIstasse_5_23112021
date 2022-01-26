@@ -47,6 +47,28 @@ function affichageElement(data) {
 }
 };
 
+//Fonction récupération des élements dans le local storage //
+function kanapLocal(i) {
+  //Récupération de la clé
+  let kanapKey = localStorage.key(i);
+  //Lecture des élements
+  let kanapStorage = JSON.parse(localStorage.getItem(kanapKey));
+  return kanapStorage;
+};
+
+// Fonction qui récupére les éléments dans un tableau //
+function kanapLocal2() {
+  //Tableau stocké dans la variable tableauItems
+  let tableauItems = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      //Envoie de l'id dans le tableau (tableauItems)
+      tableauItems.push(kanapLocal(i).id);
+      //Envoie de la couleur dans le tableau (tableauItems)
+      tableauItems.push(kanapLocal(i).couleur);
+    }
+    return tableauItems;
+};
+
 // Fonction qui permet de stocké les élements dans le panier (localStorage) //
 function ajoutLocalStorage(data) {
     //Récupération de l'élément addToCart stocké dans une variable (addToCart)
@@ -57,7 +79,7 @@ function ajoutLocalStorage(data) {
       //Stockage des données dans un objet
       let addFull = {
         id: data._id,
-        quantite: quantity.value,
+        quantite: Number(quantity.value),
         couleur: colors.value,
         name: data.name,
         prix: data.price,
@@ -65,6 +87,12 @@ function ajoutLocalStorage(data) {
         description: data.description,
         altTxt: data.altTxt
       }
+
+      //Récupération des données de la fonction kanapLocal2 stocké dans la variable tableau2
+      let tableau2 = kanapLocal2();
+      //Vérification de l'existance des données contenu dans le tableau
+      //de la fonction kanapLocal2 stocké dans la variable tabData
+      let tabData = tableau2.find(i => id && i == colors.value);
   
       //Vérification du choix d'au moins une couleur (string)
       if (colors.value === "") {
@@ -72,12 +100,41 @@ function ajoutLocalStorage(data) {
       //Vérification du choix d'au moins d'un kanap (number)
       } else if (quantity.value == 0) {
           alert("Veuillez choisir au moins un ou plusieurs kanap.");
-      } else {
-        //Ajout de l'id et de la couleur dans un tableau stocké dans une variable (addIdCouleur)
-        let addIdCouleur = [data._id, colors.value];
+      } else if (tabData) {
+        //Récupération de la valeur contenu dans l'id quantity (value)
+        let quantiteValeur = document.querySelector('#\\quantity').value;
+
+          //Ajout de l'id et de la couleur dans un tableau stocké dans une variable (storageCle2)
+          let storageCle2 = [data._id, colors.value];
+          //Lecture de la valeur quantite contenu dans le localstorage
+          storageQuantite = JSON.parse(localStorage.getItem(storageCle2)).quantite;
+
+          //Addition de la valeur contenu dans la variable quantiteValeur
+          //avec la valeur quantite contenu dans le localstorage
+          let quantiteKanap = parseInt(quantiteValeur) + parseInt(storageQuantite);
+
+              //Stockage des données dans un objet (modification de la valeur quantite)
+              let addFull2 = {
+                id: data._id,
+                quantite: quantiteKanap,
+                couleur: colors.value,
+                name: data.name,
+                prix: data.price,
+                imageUrl: data.imageUrl,
+                description: data.description,
+                altTxt: data.altTxt
+                }
+                
+                //Envoie des données dans le localstorage
+                localStorage.setItem(storageCle2, JSON.stringify(addFull2));
+                alert(`Vous venez de rajouter ${quantity.value} ${data.name} ${colors.value}.\nVotre panier contient désormais ${quantiteKanap} ${data.name} ${colors.value} !`);
+
+        } else {
+        //Ajout de l'id et de la couleur dans un tableau stocké dans une variable (storageCle)
+        let storageCle = [data._id, colors.value];
         //Envoie des données dans le localstorage
-        localStorage.setItem(addIdCouleur, JSON.stringify(addFull));
-          alert(`Votre panier contient ${quantity.value} ${data.name} ${colors.value} !`);
-      }
+        localStorage.setItem(storageCle, JSON.stringify(addFull));
+        alert(`Votre panier contient ${quantity.value} ${data.name} ${colors.value} !`);
+    }
   }
-  )};
+)};
