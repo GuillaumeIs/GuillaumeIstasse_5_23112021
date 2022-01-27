@@ -88,9 +88,9 @@ function ajoutLocalStorage(data) {
 
       //Récupération des données de la fonction kanapLocal2 stocké dans la variable tableau2
       let tableau2 = kanapLocal2();
-      //Vérification de l'existance des données contenu dans le tableau
+      //Vérification de l'existance de l'id contenu dans le tableau
       //de la fonction kanapLocal2 stocké dans la variable tabData
-      let tabData = tableau2.find((i) => i === id);
+      let tabData = tableau2.find(i => i === id);
   
       //Vérification du choix d'au moins une couleur (string)
       if (colors.value === "") {
