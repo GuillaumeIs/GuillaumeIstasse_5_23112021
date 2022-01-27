@@ -61,8 +61,14 @@ function kanapLocal2() {
   //Tableau stocké dans la variable tableauItems
   let tableauItems = [];
     for (let i = 0; i < localStorage.length; i++) {
-      //Envoie de l'id dans le tableau (tableauItems)
-      tableauItems.push(kanapLocal(i).id);
+      //Stockage de l'id et de la couleur dans un objet
+      let tableauData = {
+          id: kanapLocal(i).id, 
+          couleur: kanapLocal(i).couleur
+      }
+      //Envoie de l'objet contenant l'id
+      //et la couleur dans le tableau (tableauItems)
+      tableauItems.push(tableauData);
     }
     return tableauItems;
 };
@@ -88,9 +94,9 @@ function ajoutLocalStorage(data) {
 
       //Récupération des données de la fonction kanapLocal2 stocké dans la variable tableau2
       let tableau2 = kanapLocal2();
-      //Vérification de l'existance de l'id contenu dans le tableau
+      //Vérification de l'existance de l'id et de la couleur contenu dans le tableau
       //de la fonction kanapLocal2 stocké dans la variable tabData
-      let tabData = tableau2.find(i => i === id);
+      let tabData = tableau2.find(i => i.id == id && i.couleur == colors.value);
   
       //Vérification du choix d'au moins une couleur (string)
       if (colors.value === "") {
