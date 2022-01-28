@@ -130,6 +130,7 @@ function actuElement2() {
 };
 actuElement2();
 
+// Fonction qui vérifie les informations passé dans le formulaire //
 function nouveauFormulaire() {
     //Récupération de la valeur de l'élement firstName stocké dans la varible utiPrenom
     let utiPrenom = document.querySelector("#firstName").value;
@@ -184,38 +185,45 @@ function nouveauFormulaire() {
     } else { alert("Veuillez ajouter un kanap au panier avant de finaliser votre commande.") }
 };
 
+// Fonction qui envoie les données pour passer la commande //
 function envoieData() {
     let orderLast = document.querySelector("#order");
     //Écoute lors du clique pour finaliser la commande
     orderLast.addEventListener("click", (e) => {
         e.preventDefault();
 
-        let tabKanapLocalId = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            //Envoie de l'id dans le tableau (tabKanapLocalId)
-            tabKanapLocalId.push(kanapLocal(i).id);
+        if (nouveauFormulaire()) {
+            //Enregistrement de l'id d'un kanap dans un tableau
+            let tabKanapLocalId = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                //Envoie de l'id dans le tableau (tabKanapLocalId)
+                tabKanapLocalId.push(kanapLocal(i).id);
+                }
+
+                //Stockage des informations dans un objet récupérer dans la valeur input
+                let formValeur = {
+                    contact: {
+                        firstName: firstName.value,
+                        lastName: lastName.value,
+                        address: address.value,
+                        city: city.value,
+                        email: email.value,
+                    },
+                    products: tabKanapLocalId,
+                };
+                
+                fetch("http://localhost:3000/api/products/order", {
+                    method: "POST",
+                    body: JSON.stringify(formValeur),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then(res => res.json())
+                    .then(data => { localStorage.clear(); document.location.href = `./confirmation.html?id=${data.orderId}`; })
+                    .catch(_error => { alert('Aucune réponse du serveur (API)...'); });
         }
-            let formValeur = {
-                contact: {
-                    firstName: firstName.value,
-                    lastName: lastName.value,
-                    address: address.value,
-                    city: city.value,
-                    email: email.value,
-                },
-                products: tabKanapLocalId,
-            };
-            fetch("http://localhost:3000/api/products/order", {
-                method: "POST",
-                body: JSON.stringify(formValeur),
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            })
-                .then(res => res.json())
-                .then(data => { localStorage.clear(); document.location.href = `./confirmation.html?id=${data.orderId}`; })
-                .catch(_error => { alert('Aucune réponse du serveur (API)...'); });
     })
 };
 envoieData();
