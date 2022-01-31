@@ -5,4 +5,4 @@ let params = new URLSearchParams(window.location.search);
 let id = params.get("id");
 
 //Assosiation et affichage de l'id commande passer en paramètre URL
-document.querySelector("#orderId").innerText = `${id}`;
+document.querySelector("#orderId").innerText = `${}`;
