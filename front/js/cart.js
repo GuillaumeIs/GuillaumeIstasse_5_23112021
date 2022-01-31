@@ -226,4 +226,3 @@ function envoieData() {
         }
     })
 };
-envoieData();
